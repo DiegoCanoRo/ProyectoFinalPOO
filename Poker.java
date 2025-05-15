@@ -5,15 +5,14 @@ import java.util.*;
 
 public abstract class Poker {
     protected ArrayList<Jugador> jugadores;
-    protected ArrayList<Carta> mazo;
+    protected Baraja baraja;  // antes era ArrayList<Carta> mazo
     protected Tablero tablero;
     protected int pozo;
-    
 
     public Poker(ArrayList<Jugador> jugadores) {
         this.jugadores = jugadores;
-        this.tablero = new Tablero();
-        this.mazo = tablero.crearMazo();
+        this.tablero = new Tablero(); // aún puedes usarlo para cartas en mesa, pozo, etc.
+        this.baraja = new Baraja();   // creas la baraja
         this.pozo = 0;
     }
 
@@ -22,11 +21,10 @@ public abstract class Poker {
     public abstract int evaluarMano(ArrayList<Carta> mano);
 
     protected void barajarMazo() {
-        Collections.shuffle(mazo);
+        baraja.barajar();
     }
 
     protected Carta repartirCarta() {
-        return mazo.remove(0);
+        return baraja.repartirCarta();
     }
 }
-

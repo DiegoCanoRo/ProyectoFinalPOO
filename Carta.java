@@ -1,15 +1,17 @@
 package comdiegocano.proyectofinalpoo;
 
+public class Carta implements Comparable<Carta>{
 
-public class Carta {
     private String valor;
     private String palo;
     private int valorNumerico;
+    private boolean bocaAbajo;
 
     public Carta(String valor, String palo, int valorNumerico) {
         this.valor = valor;
         this.palo = palo;
         this.valorNumerico = valorNumerico;
+        this.bocaAbajo = false; //carta boca abajo por defecto
     }
 
     public String getValor() {
@@ -20,6 +22,15 @@ public class Carta {
         return palo;
     }
 
+    //para ver si esta ya sabes
+    public boolean getBocaAbajo() {
+        return bocaAbajo;
+    }
+
+    public void voltearCarta() {
+        this.bocaAbajo = !this.bocaAbajo;
+    }
+
     public int getValorNumerico() {
         return valorNumerico;
     }
@@ -28,5 +39,9 @@ public class Carta {
     public String toString() {
         return valor + " de " + palo;
     }
+    
+    @Override
+    public int compareTo(Carta otraCarta) {
+        return Integer.compare(this.valorNumerico, otraCarta.valorNumerico);
+    }
 }
-
