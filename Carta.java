@@ -1,5 +1,4 @@
 package comdiegocano.proyectofinalpoo;
-
 public class Carta implements Comparable<Carta>{
 
     private String valor;
