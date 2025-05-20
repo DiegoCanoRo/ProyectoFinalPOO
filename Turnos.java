@@ -1,3 +1,6 @@
+package comdiegocano.proyectofinalpoo;
+ 
+
 import java.util.*;
 
 public class Turnos {
@@ -28,6 +31,13 @@ public class Turnos {
             indiceActual = 0;
         }
     }
+      
+    public void setJugadorActual(Jugador ganador) {
+    int nuevoIndice = jugadores.indexOf(ganador);
+    if (nuevoIndice != -1) {
+        indiceActual = nuevoIndice;
+    }
+}
 
     //Cuando existan mas de 2 jugadores el juego continua
     public boolean quedanVariosJugadoresActivos() {

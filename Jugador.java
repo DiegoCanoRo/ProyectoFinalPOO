@@ -1,4 +1,3 @@
-
 package comdiegocano.proyectofinalpoo;
 
 /**
@@ -13,12 +12,30 @@ public class Jugador {
     private Mano mano;
     private int fichas;
     private boolean activo;//si sigue en el juego o abandono
-
+    private boolean haActuado;
+    private int apuestaActual = 0;
+    
     public Jugador(String nombre, int fichas) {
         this.nombre = nombre;
         this.fichas = fichas;
         this.mano = new Mano();
         this.activo = true;
+    }
+    
+    public void reiniciarApuestaActual(){
+        apuestaActual = 0;
+    }
+    
+    public int getApuestaActual(){
+        return apuestaActual;
+    }
+    
+    public void setHaActuado(boolean haActuado) {
+        this.haActuado = haActuado;
+    }
+
+    public boolean getHaActuado() {
+        return haActuado;
     }
 
     public void recibirCarta(Carta carta) {
@@ -29,14 +46,15 @@ public class Jugador {
         mano.reemplazarCartas(indices, nuevas);
     }
 
-    public ArrayList<Integer> elegirCartasADescartar() {
-        return new ArrayList<>();
+    public ArrayList<Integer> elegirCartasADescartarConInterfaz(Interfaz interfaz) {
+        return interfaz.mostrarDialogoDescarte(getMano());
     }
 
     public void apostar(int cantidad) {
         fichas -= cantidad;
+        apuestaActual +=cantidad;
     }
-    
+
     public void ganarBote(int cantidad) {
         fichas += cantidad;
     }
@@ -47,6 +65,7 @@ public class Jugador {
 
     public void retirarse() {
         activo = false;
+        mano.vaciar();//se vacia su mano porque abandono
     }
 
     public boolean estaActivo() {
